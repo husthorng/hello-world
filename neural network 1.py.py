@@ -23,15 +23,17 @@ url = "https://raw.githubusercontent.com/husthorng/hello-world/neural/trainingda
 records = pd.read_csv(url,encoding='utf-8')
 inputD=records.iloc[0:records.shape[0],0:records.shape[1]-numTag].values
 tagetD=records.iloc[:,list(records.shape[1]-np.arange(numTag,0,-1))].values
-
-
+print("\n ============input data:=========== ")
 print(inputD)
+print("\n ============layer 0 weight:=======")
 print(syn0)
+print("\n=============layer 1 weight:=======")
 print(syn1)
-print(nonlin(inputD.dot(syn0)))
+# print(nonlin(inputD.dot(syn0)))
 L0OT=nonlin(inputD.dot(syn0))
 L1OT=nonlin(L0OT.dot(syn1))
 df = pd.DataFrame(L1OT)
 df[df>0.5]=1
 df[df<0.5]=0
+print("\n=======output value:=======")
 print(df.values)
