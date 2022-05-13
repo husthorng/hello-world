@@ -62,52 +62,57 @@ W2=np.random.rand(targetD3.shape[1],hidden_node+1)
 W1=np.array([[0.374787391,0.691357659,0.399163206,0.990448565,0.068752554],[0.514618454,0.686754758,0.006648895,0.537935165,0.855330561],[0.823627609,0.855415819,0.749353856,0.424677561,0.776407309],[0.05984558,0.332534196,0.072289026,0.990402407,0.683451114],[0.258627196,0.017661597,0.429075513,0.540333555,0.016104431],[0.080995571,0.871514494,0.592766433,0.418287037,0.741965155]])
 W2=np.array([[0.434234336,0.201743691,0.565200915,0.708346399,0.385665891,0.815954239,0.687525437],[0.823950579,0.096605633,0.793742975,0.257843771,0.607604573,0.938180111,0.459160503]])
 onex=np.ones(inputD3.shape[0],dtype=int)
-print(W2)
+#print(W2)
 #print(W1.shape)
 #print(W2.shape)
 inputD3_1=np.insert(inputD3, 0, 1, axis=1)
 #print(inputD3_1[0:5,:]) # [[1.         0.30769231 0.25       0.68990385 0.18965517]
 #print(W1)
-neth=inputD3_1@W1.T
-#print(neth.shape)
-outh=nonlin(neth,deriv=False)
-#print(outh)
-outH1=np.insert(outh, 0, 1, axis=1)
-#print(outH1.shape)
-neto=outH1@W2.T
+net_h=inputD3_1@W1.T
+#print(net_h.shape)
+out_h=nonlin(net_h,deriv=False)
+#print(out_h)
+out_H1=np.insert(out_h, 0, 1, axis=1)
+#print(out_H1.shape)
+net_o=out_H1@W2.T
 print("W2.shape=",W2.shape)
-print("neto.shape=",neto.shape)
-outo=nonlin(neto,deriv=True)
-er=targetD3-neto
+print("net_o.shape=",net_o.shape)
+out_o=nonlin(net_o,deriv=False)
+er=targetD3-out_o
 ersum=np.sum(er**2)
 #print(er)
 #print(ersum)
 
-df = pd.DataFrame(inputD1)   
-df.to_csv("inputD1.csv")
+#df = pd.DataFrame(inputD1)   
+#df.to_csv("inputD1.csv")
 
-df = pd.DataFrame(W1)   
-df.to_csv("W1.csv")
-df = pd.DataFrame(W2)   
-df.to_csv("W2.csv")
+#df = pd.DataFrame(W1)   
+#df.to_csv("W1.csv")
+#df = pd.DataFrame(W2)   
+#df.to_csv("W2.csv")
 df = pd.DataFrame(er)   
 df.to_csv("er.csv")
-df = pd.DataFrame(outH1)   
-df.to_csv("outH1.csv")
-df = pd.DataFrame(outo)   
-df.to_csv("outo.csv")
+#df = pd.DataFrame(out_H1)   
+#df.to_csv("out_H1.csv")
+#df = pd.DataFrame(out_o)   
+#df.to_csv("out_o.csv")
+#df = pd.DataFrame(net_o)   
+#df.to_csv("net_o.csv")
+df = pd.DataFrame(targetD3)   
+df.to_csv("targetD3.csv")
 
-delta_o=outo*(1-outo)*er
+delta_o=out_o*(1-out_o)*er
+
 
 df = pd.DataFrame(delta_o)   
 df.to_csv("delta_o.csv")
 
-ckdao=delta_o.T@outH1
+ckdao=delta_o.T@out_H1
 
 df = pd.DataFrame(ckdao)   
 df.to_csv("ckdao.csv")
 
-delta_W2=lr*delta_o.T@outH1
+delta_W2=lr*delta_o.T@out_H1
 #print(delta_W2.shape)
 W2 = W2+delta_W2
 
@@ -121,7 +126,7 @@ else:
 
 
 
-#print("delta2*er= \n",neto*er)
+#print("delta2*er= \n",net_o*er)
 
 #h2=np.insert(h1, 0, 1, axis=1)
 #result2=h2@W2.T
