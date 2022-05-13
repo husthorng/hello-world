@@ -90,32 +90,36 @@ ersum=np.sum(er**2)
 #df.to_csv("W1.csv")
 #df = pd.DataFrame(W2)   
 #df.to_csv("W2.csv")
-df = pd.DataFrame(er)   
-df.to_csv("er.csv")
+#df = pd.DataFrame(er)   
+#df.to_csv("er.csv")
 #df = pd.DataFrame(out_H1)   
 #df.to_csv("out_H1.csv")
 #df = pd.DataFrame(out_o)   
 #df.to_csv("out_o.csv")
 #df = pd.DataFrame(net_o)   
 #df.to_csv("net_o.csv")
-df = pd.DataFrame(targetD3)   
-df.to_csv("targetD3.csv")
+#df = pd.DataFrame(targetD3)   
+#df.to_csv("targetD3.csv")
 
 delta_o=out_o*(1-out_o)*er
-
-
-df = pd.DataFrame(delta_o)   
-df.to_csv("delta_o.csv")
+#df = pd.DataFrame(delta_o)   
+#df.to_csv("delta_o.csv")
 
 ckdao=delta_o.T@out_H1
 
-df = pd.DataFrame(ckdao)   
-df.to_csv("ckdao.csv")
+#df = pd.DataFrame(ckdao)   
+#df.to_csv("ckdao.csv")
 
 delta_W2=lr*delta_o.T@out_H1
+
+#df = pd.DataFrame(delta_W2)   
+#df.to_csv("delta_W2.csv")
+
 #print(delta_W2.shape)
 W2 = W2+delta_W2
 
+df = pd.DataFrame(W2)   
+df.to_csv("W2.csv")
 
 
 if ersum < SSE_Goal :
