@@ -1,3 +1,4 @@
+# neural1.py
 import csv
 import numpy as np
 import pandas as pd
@@ -10,17 +11,22 @@ def nonlin(x,deriv=False):
     if(deriv==True):
         return (A*(1-A))
     return A
-
+    
+print(nonlin(0,False))
+print(nonlin(0,True))
 
 numTag=1   
 hidden_node=3 
 records = pd.read_csv(url,encoding='utf-8')
-print(records.shape) # (4, 4)
+print(records.shape) 
 
 inputD=records.iloc[0:records.shape[0],0:records.shape[1]-numTag].values
-print(inputD.shape) # (4, 3)
+print(inputD.shape) 
 
 targetD=records.iloc[:,list(records.shape[1]-np.arange(numTag,0,-1))].values
-print(targetD.shape) # (4, 3)
+print(targetD.shape) 
+
 print(inputD)
+
 print(targetD)
+
