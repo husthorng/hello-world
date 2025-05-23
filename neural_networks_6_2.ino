@@ -1,5 +1,10 @@
 
 // Template ID, Device Name and Auth Token are provided by the Blynk.Cloud
+
+//neural network.py
+//https://github.com/husthorng/hello-world/raw/refs/heads/neural/neural%20network.py
+
+
 // See the Device Info tab, or Template settings
 #define BLYNK_TEMPLATE_ID "TMPLH3WcbP58"
 #define BLYNK_TEMPLATE_NAME "horng networks"
