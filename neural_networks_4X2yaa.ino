@@ -1,8 +1,11 @@
+
+// neural network 4X1y
+//backpropagation_4x2y.ipynb
+//https://colab.research.google.com/drive/1kzRu2XxZtT6cYhEdR7p2S3UrEU97hfeg?usp=sharing
+
+
 //https://blynk.cloud/dashboard/61121/global/devices/3361292/organization/61121/devices/2048871/dashboard
 //horng.tw  mc327
-// neural network 4X1y
-//「backpropagation_4X1y.ipynb」的副本
-
 #define BLYNK_TEMPLATE_ID "TMPL6u5it5Pr2"
 #define BLYNK_TEMPLATE_NAME "neural network 4X1y"
 #define BLYNK_AUTH_TOKEN "s8S9T6dwbDN_EJTyd59_vQti3lsKn8jH"
