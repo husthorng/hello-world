@@ -6,9 +6,9 @@
 
 
 // See the Device Info tab, or Template settings
-#define BLYNK_TEMPLATE_ID "TMPL6u5it5Pr2"
-#define BLYNK_TEMPLATE_NAME "neural network"
-#define BLYNK_AUTH_TOKEN "y7JkJvU3Sc3wglQ4wAmf23M4aMXZNdMh"
+#define BLYNK_TEMPLATE_ID "TMPLAwMG180n"
+#define BLYNK_TEMPLATE_NAME "neural application 1"
+#define BLYNK_AUTH_TOKEN "UbiosdmoXeAqm90vALcllHzLEWgFEdrD"
 //https://blynk.cloud/dashboard/61121/global/devices/1/organization/61121/devices/538136/dashboard
 //horng.tw  mc327
 
@@ -33,10 +33,10 @@ float inp[3]={1,0,1};
 // Set password to "" for open networks.
 char ssid[] = "husthung";
 char pass[] = "ma2553968";
-WidgetLED led1(V2);
-WidgetLED led2(V3);
-WidgetLED led3(V4);
-WidgetLED led4(V0);
+WidgetLED led1(V1);
+WidgetLED led2(V2);
+WidgetLED led3(V3);
+WidgetLED led4(V4);
 BlynkTimer timer;
 
 //Serial.println(inp[2]);
@@ -48,23 +48,23 @@ BlynkTimer timer;
 
 void blinkLedWidget()
 {
-if (digitalRead(4)==HIGH){   //led on
-  led2.on();
-  inp[1]=1;
-  }else {
-  led2.off();
-  inp[1]=0;
-}
-
-if (digitalRead(5)==HIGH){   //led on
+if (digitalRead(2)==HIGH){   //led on
   led1.on();
   inp[0]=1;
   }else {
   led1.off();
-  inp[0]=0 ;
+  inp[0]=0;
 }
 
 if (digitalRead(0)==HIGH){   //led on
+  led2.on();
+  inp[1]=1;
+  }else {
+  led2.off();
+  inp[1]=0 ;
+}
+
+if (digitalRead(4)==HIGH){   //led on
   led3.on();
   inp[2]=1;
   }else {
