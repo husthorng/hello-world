@@ -22,7 +22,7 @@
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
 const int ledPinD8 =  15; //D8
-const int ledPinD7 =  16; //D0
+const int ledPinD7 =  14; //D0
 
 char auth[] = BLYNK_AUTH_TOKEN;
 
