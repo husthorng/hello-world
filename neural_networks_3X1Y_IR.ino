@@ -9,6 +9,8 @@
 #define BLYNK_TEMPLATE_ID "TMPLAwMG180n"
 #define BLYNK_TEMPLATE_NAME "neural application 1"
 #define BLYNK_AUTH_TOKEN "UbiosdmoXeAqm90vALcllHzLEWgFEdrD"
+#include "IRremote.hpp"
+
 //https://blynk.cloud/dashboard/61121/global/devices/1/organization/61121/devices/538136/dashboard
 //horng.tw  mc327
 
@@ -23,6 +25,15 @@
 byte lastButtonState = LOW;
 byte ledState = LOW;
 int buttonState = 0;
+
+const int irReceiverPin = D5;
+
+const int ledPin1 = D1;      
+const int ledPin2 = D2;
+const int ledPin3 = D3;
+
+unsigned long lastSignalTime = 0;
+unsigned long signalIgnoreInterval = 500; // 100 milliseconds
 
 char auth[] = BLYNK_AUTH_TOKEN;
 // float syn0[3][3]=  {-3.257387665,-0.206060687,-0.13212917,6.43315093,-1.732541429,-2.528397437,-10.3957316,-0.410807107,0.846853671};
@@ -42,6 +53,7 @@ WidgetLED led1(V1);
 WidgetLED led2(V2);
 WidgetLED led3(V3);
 WidgetLED led4(V4);
+
 BlynkTimer timer;
 
 //Serial.println(inp[2]);
@@ -120,14 +132,20 @@ if (digitalRead(5)==HIGH){   //led on D1
 
 void setup()
 {
+
+  // Debug console
+  Serial.begin(115200);
   pinMode(ledPin, OUTPUT);
 
   pinMode(buzzer,OUTPUT);  
   pinMode(BUTTON_PIN, INPUT_PULLUP);
 
+  IrReceiver.begin(irReceiverPin , ENABLE_LED_FEEDBACK);  
+  
+    pinMode(ledPin1, OUTPUT);
+    pinMode(ledPin2, OUTPUT);
+    pinMode(ledPin3, OUTPUT); 
 
-  // Debug console
-  Serial.begin(115200);
 
   Blynk.begin(auth, ssid, pass);
   // You can also specify server:
@@ -142,7 +160,31 @@ void setup()
 
 void loop()
 {
-  
+  if (IrReceiver.decode()) {
+
+    unsigned long int decCode = IrReceiver.decodedIRData.command;
+//    Serial.println(decCode, HEX);
+      Serial.println(decCode);
+
+  unsigned long currentTime = millis();
+    if (currentTime - lastSignalTime > signalIgnoreInterval) {
+
+      if (decCode == 18) {
+       digitalWrite(ledPin1, !digitalRead(ledPin1));
+ 
+      } else if (decCode == 17) {
+        digitalWrite(ledPin2, !digitalRead(ledPin2));
+       
+      } else if (decCode == 16) {
+        digitalWrite(ledPin3, !digitalRead(ledPin3));   
+      }
+      
+      lastSignalTime = currentTime;
+    }
+
+    IrReceiver.resume();
+  }
+
   Blynk.run();
   timer.run();
 }
