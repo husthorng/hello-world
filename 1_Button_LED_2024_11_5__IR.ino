@@ -108,6 +108,14 @@ void loop()
 //              buttonState = digitalRead(LED_PIN);
 //              lastSignalTime = currentTime;
               delay(1000);
+            if (digitalRead(LED_PIN) == HIGH){
+                digitalWrite(buzzer,HIGH);
+              }
+              else {
+                digitalWrite(buzzer,LOW);
+              }              
+
+
            }
 
            IrReceiver.resume();
